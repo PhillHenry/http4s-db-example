@@ -132,7 +132,7 @@ object MyMain extends IOApp {
 
   def run(args: List[String]): IO[ExitCode] =
     BlazeServerBuilder[IO]
-      .bindHttp(8080, "localhost")
+      .bindHttp(8081, "localhost")
     .withServiceErrorHandler(_=>errorhandler)
       .withHttpApp(httpApp)
       .serve
