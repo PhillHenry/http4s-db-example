@@ -33,9 +33,7 @@ object MyMain extends IOApp {
 
   private val flyway = Flyway.configure.dataSource(ctx.dataSource).load
 
-  println(flyway.migrate())
-
-  private val blockingPool = Executors.newFixedThreadPool(4)
+  println(s"Flyway result: ${flyway.migrate()}")
 
   val xa: Transactor[IO]= Transactor.fromDataSource[IO](ctx.dataSource,ExecutionContext.global)
 
