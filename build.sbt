@@ -4,6 +4,14 @@ version := "0.2"
 
 scalaVersion := "2.13.6"
 
+lazy val root = (project in file(".")).//enablePlugins(assembly).
+  settings(
+    name := "my-project",
+    version := "1.0",
+    scalaVersion := "2.11.4",
+    mainClass in Compile := Some("example.MyMain")
+  )
+
 val http4sVersion = "0.23.3"
 
 val doobieVersion= "1.0.0-RC1"
@@ -23,4 +31,11 @@ libraryDependencies ++= Seq(
   "org.tpolecat" %% "doobie-quill" % doobieVersion,
   "org.flywaydb" % "flyway-core" % "6.3.2"
 )
+
+mergeStrategy in assembly ~= { (old) =>
+  {
+    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+    case x => MergeStrategy.first
+  }
+}
 
